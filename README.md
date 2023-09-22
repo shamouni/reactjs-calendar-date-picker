@@ -27,15 +27,10 @@ import { useState } from "react";
 import Calendar, { TCalDate } from "reactjs-calendar-date-picker";
 import "reactjs-calendar-date-picker/dist/style.css";
 
-type TState = {
-  fromDate: string;
-  toDate: string;
-};
-
 const App = () => {
-  const [selected, setSelected] = useState<TState>();
+  const [selected, setSelected] = useState();
 
-  const onChange = (arg: TCalDate) => {
+  const onChange = (arg) => {
     const { from, to } = arg;
 
     const fromDate = new Date(from).toLocaleDateString();
@@ -62,8 +57,7 @@ const App = () => {
       </p>
     </div>
   );
-}
+};
 
 export default App;
-
 ```
