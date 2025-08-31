@@ -1,8 +1,10 @@
-import Calendar, { TCalDate } from "reactjs-calendar-date-picker";
+import { useRef, useState } from "react";
+import Calendar, { TCalDate, TCalendarRef } from "reactjs-calendar-date-picker";
+
+import "reactjs-calendar-date-picker/dist/style.css";
 import "reactjs-calendar-date-picker/dist/style.css";
 
-import { useState } from "react";
-// import Calendar, { TCalDate } from "./components/Calendar";
+// import Calendar, { TCalDate, TCalendarRef } from "./components/Calendar";
 // import "./index.css";
 
 type TState = {
@@ -11,33 +13,38 @@ type TState = {
 };
 
 const App = () => {
-  const [selected, setSelected] = useState<TState>();
+  const [selected, setSelected] = useState<TState | null>(null);
 
   const onChange = (arg: TCalDate) => {
     const { from, to } = arg;
 
-    const fromDate = new Date(from).toLocaleDateString();
+    const fromDate = from ? new Date(from).toLocaleDateString() : "";
     const toDate = to ? new Date(to).toLocaleDateString() : "";
 
     setSelected({ fromDate, toDate });
   };
 
-  // convert dates: new Date().getTime() -> 1691526600000
-  const sample_days = [1691526600000, 1691699400000];
+  // reserved days
+  const sample_days = [
+    new Date(2025, 7, 14, 0, 0, 0, 0).getTime(),
+    new Date(2025, 7, 12, 0, 0, 0, 0).getTime(),
+  ];
 
   const { fromDate, toDate } = selected || {};
+  const calRef = useRef<TCalendarRef>(null);
+
+  const onClearClick = () => calRef.current?.clear();
 
   return (
     <div className="container">
-      <Calendar reservedDays={sample_days} onChange={onChange} />
+      <Calendar reservedDays={sample_days} onChange={onChange} ref={calRef} />
       <p className="note">
-        {fromDate && toDate && (
-          <>
-            <span>from: {fromDate}</span>
-            <span>to: {toDate}</span>
-          </>
-        )}
+        {fromDate && <span>from: {fromDate}</span>}
+        {toDate && <span>to: {toDate}</span>}
       </p>
+      <div>
+        <button onClick={onClearClick}>clear</button>
+      </div>
     </div>
   );
 };
