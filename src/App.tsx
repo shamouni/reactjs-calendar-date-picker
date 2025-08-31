@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
-import Calendar, { TCalDate, TCalendarRef } from "reactjs-calendar-date-picker";
 
-import "reactjs-calendar-date-picker/dist/style.css";
+import Calendar from "reactjs-calendar-date-picker";
+import { type TCalDate, type TCalendarRef } from "reactjs-calendar-date-picker";
 import "reactjs-calendar-date-picker/dist/style.css";
 
 // import Calendar, { TCalDate, TCalendarRef } from "./components/Calendar";

@@ -6,13 +6,12 @@
 
 .container {
   color: #666;
-  font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 2em;
   font-family: "Quicksand", sans-serif;
+  font-weight: bold;
 }
 .container > p.note {
   display: flex;

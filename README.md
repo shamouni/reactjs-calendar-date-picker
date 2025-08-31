@@ -12,7 +12,8 @@ A date picker calendar component built with react that supports date selection a
 
 ```js
 import { useRef, useState } from "react";
-import Calendar, { TCalDate, TCalendarRef } from "reactjs-calendar-date-picker";
+import Calendar from "reactjs-calendar-date-picker";
+import { type TCalDate, type TCalendarRef } from "reactjs-calendar-date-picker";
 ```
 
 You need to import the css style
@@ -25,11 +26,18 @@ import "reactjs-calendar-date-picker/dist/style.css";
 
 ```js
 import { useRef, useState } from "react";
-import Calendar, { TCalDate, TCalendarRef } from "reactjs-calendar-date-picker";
+
+import Calendar from "reactjs-calendar-date-picker";
+import { type TCalDate, type TCalendarRef } from "reactjs-calendar-date-picker";
 import "reactjs-calendar-date-picker/dist/style.css";
 
+type TState = {
+  fromDate: string;
+  toDate: string;
+};
+
 const App = () => {
-  const [selected, setSelected] = (useState < TState) | (null > null);
+  const [selected, setSelected] = useState<TState | null>(null);
 
   const onChange = (arg: TCalDate) => {
     const { from, to } = arg;
@@ -47,7 +55,7 @@ const App = () => {
   ];
 
   const { fromDate, toDate } = selected || {};
-  const calRef = useRef < TCalendarRef > null;
+  const calRef = useRef<TCalendarRef>(null);
 
   const onClearClick = () => calRef.current?.clear();
 
